@@ -1,7 +1,7 @@
 import type { DocumentPayload } from "@/types/documents";
 import { renderOfficialLetter } from "./official-letter";
 import { renderCoverLetter } from "./cover-letter";
-import { renderPdfFromText } from "./pdf-from-text";
+// Removed pdf-from-text
 import { renderInvoice } from "./invoice";
 import { renderContract } from "./contract";
 
@@ -11,8 +11,8 @@ export function renderDocument(payload: DocumentPayload): string {
             return renderOfficialLetter(payload);
         case "cover-letter":
             return renderCoverLetter(payload);
-        case "pdf-from-text":
-            return renderPdfFromText(payload);
+        case "job-letter":
+            return '<p style="color:#94a3b8;">Job letter uses custom workspace.</p>';
         case "invoice":
             return renderInvoice(payload);
         case "contract":

@@ -13,8 +13,9 @@ const OfficialLetterForm = dynamic(() => import("@/components/forms/OfficialLett
 const CoverLetterForm = dynamic(() => import("@/components/forms/CoverLetterForm"), {
     loading: () => <LoadingSkeleton />,
 });
-const PdfFromTextForm = dynamic(() => import("@/components/forms/PdfFromTextForm"), {
+const JobLetterWorkspace = dynamic(() => import("@/components/job-letter/JobLetterWorkspace"), {
     loading: () => <LoadingSkeleton />,
+    ssr: false,
 });
 const InvoiceForm = dynamic(() => import("@/components/forms/InvoiceForm"), {
     loading: () => <LoadingSkeleton />,
@@ -43,6 +44,10 @@ const WatermarkTool = dynamic(() => import("@/components/tools/WatermarkTool"), 
     loading: () => <LoadingSkeleton />,
     ssr: false,
 });
+const ApplicationTracker = dynamic(() => import("@/components/tracker/ApplicationTracker"), {
+    loading: () => <LoadingSkeleton />,
+    ssr: false,
+});
 
 function getFormComponent(docType: string) {
     switch (docType) {
@@ -50,8 +55,7 @@ function getFormComponent(docType: string) {
             return <OfficialLetterForm />;
         case "cover-letter":
             return <CoverLetterForm />;
-        case "pdf-from-text":
-            return <PdfFromTextForm />;
+        // Job letter handled in full workspace conditionally
         case "invoice":
             return <InvoiceForm />;
         case "contract":
@@ -66,6 +70,10 @@ export default function Workspace() {
 
     if (activeDocumentType === "resume-builder") {
         return <ResumeBuilderWorkspace />;
+    }
+
+    if (activeDocumentType === "job-letter") {
+        return <JobLetterWorkspace />;
     }
 
     if (activeDocumentType === "resume-tailoring") {
@@ -86,6 +94,10 @@ export default function Workspace() {
 
     if (activeDocumentType === "watermark-tool") {
         return <WatermarkTool />;
+    }
+
+    if (activeDocumentType === "application-tracker") {
+        return <ApplicationTracker />;
     }
 
     return (

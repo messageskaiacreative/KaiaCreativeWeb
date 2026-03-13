@@ -11,14 +11,15 @@ export type DocumentType =
     | "resume-builder"
     | "official-letter"
     | "cover-letter"
-    | "pdf-from-text"
+    | "job-letter"
     | "invoice"
     | "contract"
     | "cv-from-file"
     | "resume-tailoring"
     | "resume-distribution"
     | "pdf-extractor"
-    | "watermark-tool";
+    | "watermark-tool"
+    | "application-tracker";
 
 /** Document category metadata */
 export interface DocumentCategory {
@@ -53,10 +54,10 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
         tier: "free",
     },
     {
-        id: "pdf-from-text",
-        label: "PDF from Text",
-        description: "Convert raw text or markdown into a clean, formatted PDF",
-        icon: "FileOutput",
+        id: "job-letter",
+        label: "Job Letter",
+        description: "Strictly formatted job application letters with PDF/DOC export",
+        icon: "Mail",
         tier: "free",
     },
     {
@@ -108,6 +109,13 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
         icon: "Shield",
         tier: "free",
     },
+    {
+        id: "application-tracker",
+        label: "App Tracker",
+        description: "Track your job applications using your own Google Sheet",
+        icon: "Target",
+        tier: "free",
+    },
 ];
 
 // ============================================================
@@ -156,18 +164,11 @@ export interface CoverLetterPayload {
 }
 
 // ============================================================
-// PDF FROM TEXT PAYLOAD
+// JOB LETTER PAYLOAD
 // ============================================================
-export interface PdfFromTextPayload {
-    type: "pdf-from-text";
-    title: string;
-    content: string;
-    author: string;
-    date: string;
-    format: "plain" | "markdown";
-    pageSize: "A4" | "Letter" | "Legal";
-    fontSize: number;
-    template: "minimal" | "document" | "report";
+export interface JobLetterPayload {
+    type: "job-letter";
+    // Using simple payload since state is managed by Zustand store in client
 }
 
 // ============================================================
@@ -239,7 +240,7 @@ export interface ContractPayload {
 export type DocumentPayload =
     | OfficialLetterPayload
     | CoverLetterPayload
-    | PdfFromTextPayload
+    | JobLetterPayload
     | InvoicePayload
     | ContractPayload;
 
@@ -293,11 +294,10 @@ export function getTemplatesForType(docType: DocumentType): TemplateOption[] {
                 { id: "modern", label: "Modern", tier: "premium", description: "Contemporary sleek design" },
                 { id: "executive", label: "Executive", tier: "premium", description: "Senior professional format" },
             ];
-        case "pdf-from-text":
+        case "job-letter":
             return [
-                { id: "minimal", label: "Minimal", tier: "free", description: "Clean, minimal text layout" },
-                { id: "document", label: "Document", tier: "free", description: "Standard document format" },
-                { id: "report", label: "Report", tier: "premium", description: "Professional report layout" },
+                { id: "formal", label: "Formal", tier: "free", description: "Standard job application letter" },
+                { id: "modern", label: "Modern", tier: "premium", description: "Modern styling for job application" }
             ];
         case "invoice":
             return [
