@@ -166,7 +166,7 @@ export function validateSheetUrl(url: string): string | null {
     if (!url.includes("docs.google.com"))
         return "Link must be from docs.google.com";
     if (!url.includes("export?format=csv") && !url.includes("export?gid=") && !url.includes("pub?output=csv"))
-        return "Link must contain export?format=csv — use the CSV export URL";
+        return "Link must contain export?format=csv - use the CSV export URL";
     return null;
 }
 

@@ -215,9 +215,9 @@ export default function ResumeTailoringTool() {
                                 <div className="space-y-3">
                                     {result.suggestions.map((tip, i) => {
                                         const colors = {
-                                            success: { bg: '#f8fafc', border: '#cbd5e1', icon: '✅', text: '#334155' },
-                                            warning: { bg: '#fffbeb', border: '#fde68a', icon: '⚠️', text: '#92400e' },
-                                            error: { bg: '#fef2f2', border: '#fecaca', icon: '❌', text: '#991b1b' },
+                                            success: { bg: '#f8fafc', border: '#cbd5e1', icon: 'OK', text: '#334155' },
+                                            warning: { bg: '#fffbeb', border: '#fde68a', icon: 'Warning', text: '#92400e' },
+                                            error: { bg: '#fef2f2', border: '#fecaca', icon: 'Error', text: '#991b1b' },
                                         };
                                         const c = colors[tip.type] || colors.warning;
                                         return (
@@ -254,7 +254,7 @@ export default function ResumeTailoringTool() {
                                         ))}
                                     </div>
                                     <div className="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-sm">
-                                        <p className="text-xs text-slate-500 leading-relaxed font-medium"><span className="text-amber-600 font-bold mr-1">💡 TIP:</span> Tambahkan keyword ini secara natural di bagian summary, experience, atau skills pada resume Anda. Hindari keyword stuffing secara massal tanpa konteks.</p>
+                                        <p className="text-xs text-slate-500 leading-relaxed font-medium"><span className="text-amber-600 font-bold mr-1">TIP:</span> Tambahkan keyword ini secara natural di bagian summary, experience, atau skills pada resume Anda. Hindari keyword stuffing secara massal tanpa konteks.</p>
                                     </div>
                                 </div>
                             )}

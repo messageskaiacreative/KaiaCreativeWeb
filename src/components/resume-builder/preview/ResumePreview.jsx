@@ -12,12 +12,12 @@ import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSo
 import { CSS } from '@dnd-kit/utilities';
 
 const TEMPLATES = [
-    { id: 'modern', label: 'Modern', emoji: '🎨' },
-    { id: 'professional', label: 'Professional', emoji: '📋' },
-    { id: 'minimal', label: 'Minimal', emoji: '⬜' },
-    { id: 'creative', label: 'Creative', emoji: '✨' },
-    { id: 'executive', label: 'Executive', emoji: '👔' },
-    { id: 'tech', label: 'Tech', emoji: '💻' },
+    { id: 'modern', label: 'Modern' },
+    { id: 'professional', label: 'Professional' },
+    { id: 'minimal', label: 'Minimal' },
+    { id: 'creative', label: 'Creative' },
+    { id: 'executive', label: 'Executive' },
+    { id: 'tech', label: 'Tech' },
 ];
 
 const TEMPLATE_MAP = {
@@ -135,7 +135,7 @@ const ResumePreview = () => {
                                 : 'bg-slate-50 text-slate-500 border-slate-200 hover:border-slate-300 hover:text-slate-700 hover:bg-slate-100'
                                 }`}
                         >
-                            {t.emoji} {t.label}
+                            {t.label}
                         </button>
                     ))}
                 </div>

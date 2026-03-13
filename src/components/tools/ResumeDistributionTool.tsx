@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Send, Copy, Check, Mail, Globe, FileText, Building2, Linkedin, Briefcase, Target, Zap, Search } from 'lucide-react';
+import { Send, Copy, Check, Mail, Globe, FileText, Building2, Linkedin, Briefcase, Target, Zap, Search, X } from 'lucide-react';
 
 const PLATFORMS = [
     { id: 'linkedin', name: 'LinkedIn', icon: Linkedin, color: '#0077B5', desc: 'Kirim langsung via LinkedIn Easy Apply' },
@@ -208,7 +208,7 @@ ${applicantPhone || '[Nomor Telepon]'}`;
 
                             {showAddApplication && (
                                 <div className="bg-slate-50 rounded-sm p-4 mb-4 border border-slate-200 relative">
-                                    <button onClick={() => setShowAddApplication(false)} className="absolute top-3 right-3 text-slate-400 hover:text-slate-600">✕</button>
+                                    <button onClick={() => setShowAddApplication(false)} className="absolute top-3 right-3 text-slate-400 hover:text-slate-600"><X className="w-3.5 h-3.5" /></button>
                                     <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Form Lamaran Baru</h3>
                                     <div className="grid grid-cols-2 gap-3 mb-3">
                                         <input placeholder="Nama Perusahaan *" value={newApp.company} onChange={e => setNewApp(p => ({ ...p, company: e.target.value }))}

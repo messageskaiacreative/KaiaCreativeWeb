@@ -254,7 +254,7 @@ export default function WatermarkTool() {
         if (val <= 25) return "Medium protection";
         if (val <= 35) return "Strong protection";
         if (val <= 45) return "Very strong";
-        if (val <= 55) return "✓ Recommended anti-AI level";
+        if (val <= 55) return "Recommended anti-AI level";
         return "Very hard to remove but visible";
     }
 

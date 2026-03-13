@@ -196,16 +196,35 @@ export default function ApplicationTracker() {
                                 <Info className="w-3.5 h-3.5" />
                                 How it works
                             </div>
-                            <p className="leading-relaxed mb-1.5">
+                            <p className="leading-relaxed mb-2">
                                 This app uses your own Google Sheet as storage.
                             </p>
-                            <ul className="space-y-0.5 ml-3" style={{ listStyle: "disc" }}>
-                                <li>The link is stored only in this browser</li>
-                                <li>If you change device, you must enter the link again</li>
-                                <li>If you clear browser data, the link will be lost</li>
-                                <li>Each user should use their own sheet file</li>
-                                <li>The sheet must be public or shareable</li>
-                            </ul>
+                            <ol className="space-y-0.5 ml-3 mb-3" style={{ listStyle: "decimal" }}>
+                                <li>Download the template file.</li>
+                                <li>Upload the file to your Google Sheet.</li>
+                                <li>Make sure the sheet can be accessed using a link.</li>
+                                <li>Copy the CSV export link from Google Sheet.</li>
+                                <li>Paste the link into the Sheet Link field.</li>
+                                <li>Click Load Sheet to display your data.</li>
+                            </ol>
+                            <p className="leading-relaxed mb-2">
+                                Each row represents one company.
+                                You can update the sheet at any time and reload it in the app.
+                            </p>
+                            <div className="mt-2 pt-2" style={{ borderTop: "1px solid rgba(37, 99, 235, 0.1)" }}>
+                                <div className="font-semibold mb-1" style={{ color: "#2563eb" }}>
+                                    Important notes
+                                </div>
+                                <ul className="space-y-0.5 ml-3" style={{ listStyle: "disc" }}>
+                                    <li>The link is stored only in this browser.</li>
+                                    <li>If you change device, you must enter the link again.</li>
+                                    <li>If you clear browser data, the link will be lost.</li>
+                                    <li>Each user should use their own sheet file.</li>
+                                    <li>The sheet must be public or accessible by link.</li>
+                                    <li>Do not change the column names in the template.</li>
+                                    <li>If the format is changed, the app may not be able to read the data.</li>
+                                </ul>
+                            </div>
                         </div>
                     )}
 
@@ -769,7 +788,7 @@ function FormSelect({
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                 >
-                    <option value="">— Select —</option>
+                    <option value="">- Select -</option>
                     {options.map((opt) => (
                         <option key={opt} value={opt}>
                             {opt}
