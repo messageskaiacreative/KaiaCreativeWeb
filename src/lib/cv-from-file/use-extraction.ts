@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { toast } from "react-hot-toast";
+import { createClient } from "@/lib/supabase/client";
+
 
 export type ExtractionStatus = "pending" | "processing" | "completed" | "failed";
 
@@ -15,7 +15,7 @@ export interface Extraction {
 }
 
 export function useExtraction() {
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const [loading, setLoading] = useState(false);
 
   /**
@@ -52,11 +52,9 @@ export function useExtraction() {
 
       if (dbError) throw dbError;
 
-      toast.success("Extraction started! Converting your PDF...");
       return data as Extraction;
     } catch (error: any) {
       console.error("Extraction error:", error);
-      toast.error(error.message || "Failed to start extraction");
       return null;
     } finally {
       setLoading(false);
