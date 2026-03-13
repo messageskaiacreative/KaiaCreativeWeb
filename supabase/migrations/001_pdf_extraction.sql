@@ -148,8 +148,8 @@ CREATE EXTENSION IF NOT EXISTS http WITH SCHEMA extensions;
 CREATE OR REPLACE FUNCTION notify_extraction_worker()
 RETURNS TRIGGER AS $$
 DECLARE
-  worker_url TEXT := 'YOUR_WORKER_URL/process-webhook';
-  webhook_secret TEXT := 'YOUR_WEBHOOK_SECRET';
+  worker_url TEXT := 'https://your-deployed-worker-url.com/process-webhook';
+  webhook_secret TEXT := 'sk_docgen_e29d74f2b1a5c6e83d9a0f4b27c3e1a6';
   payload JSONB;
   response extensions.http_response;
 BEGIN

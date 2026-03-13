@@ -86,12 +86,14 @@ export async function middleware(request: NextRequest) {
         }
     );
 
-    // IMPORTANT: Do NOT use supabase.auth.getSession() here.
-    // getUser() validates the token server-side (secure).
-    // getSession() only reads from cookies (can be tampered).
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
+    let user = null;
+    try {
+        const { data } = await supabase.auth.getUser();
+        user = data.user;
+    } catch (err) {
+        console.error("Middleware Supabase getUser error:", err);
+        // user remains null
+    }
 
 
     // If user is NOT authenticated and trying to access a protected route

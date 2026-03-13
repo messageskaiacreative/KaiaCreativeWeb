@@ -25,9 +25,13 @@ export interface AuthActionResult {
  * This terminates ALL sessions across all devices (single-device enforcement)
  */
 export async function logoutAction(): Promise<void> {
-    const supabase = await createClient();
-    await supabase.auth.signOut({ scope: "global" });
-    revalidatePath("/", "layout");
+    try {
+        const supabase = await createClient();
+        await supabase.auth.signOut({ scope: "global" });
+        revalidatePath("/", "layout");
+    } catch (e) {
+        console.error("[Logout Error]", e);
+    }
     redirect("/auth/login");
 }
 
@@ -35,9 +39,8 @@ export async function loginWithPasswordAction(
     email: string,
     password: string
 ): Promise<AuthActionResult> {
-    const supabase = await createClient();
-
     try {
+        const supabase = await createClient();
         const { error } = await supabase.auth.signInWithPassword({
             email,
             password,
@@ -67,9 +70,8 @@ export async function registerWithPasswordAction(
     email: string,
     password: string
 ): Promise<AuthActionResult> {
-    const supabase = await createClient();
-
     try {
+        const supabase = await createClient();
         const { error } = await supabase.auth.signUp({
             email,
             password,

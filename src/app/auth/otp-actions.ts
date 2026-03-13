@@ -59,9 +59,8 @@ export async function requestOtpAction(
         return { error: parsed.error.issues[0].message };
     }
 
-    const supabase = await createClient();
-
     try {
+        const supabase = await createClient();
         const { error } = await supabase.auth.signInWithOtp({
             email: parsed.data.email,
             options: {
@@ -132,9 +131,8 @@ export async function verifyOtpAction(
         return { error: parsed.error.issues[0].message };
     }
 
-    const supabase = await createClient();
-
     try {
+        const supabase = await createClient();
         const { data, error } = await supabase.auth.verifyOtp({
             email: parsed.data.email,
             token: parsed.data.token,
