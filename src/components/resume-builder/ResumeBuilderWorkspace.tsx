@@ -672,7 +672,7 @@ const ResumeBuilderContent = () => {
                         z-index: 99999 !important;
                     }
                     
-                    @page { size: A4; margin: 15mm 0; }
+                    @page { size: A4; margin: 0; }
                     
                     .resume-paper {
                         width: 100% !important;
