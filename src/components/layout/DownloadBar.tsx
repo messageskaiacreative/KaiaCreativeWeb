@@ -3,6 +3,7 @@
 import { useAppStore } from "@/store/app-store";
 import { Download, Loader2, Eye } from "lucide-react";
 import { useState } from "react";
+import { isRateLimited, MAX_PDF_PER_MINUTE } from "@/lib/safety-limits";
 
 export default function DownloadBar() {
     const { currentPayload, getUserTier, isDownloading, setIsDownloading, showToast } = useAppStore();
@@ -12,6 +13,12 @@ export default function DownloadBar() {
     async function handleDownload() {
         if (!currentPayload) {
             showToast("Please fill in the form first", "error");
+            return;
+        }
+
+        // Rate limit check (client-side, no Redis)
+        if (isRateLimited("pdf-export", MAX_PDF_PER_MINUTE)) {
+            showToast(`Rate limit: max ${MAX_PDF_PER_MINUTE} downloads per minute. Please wait.`, "error");
             return;
         }
 

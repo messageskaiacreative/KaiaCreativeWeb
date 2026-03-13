@@ -15,7 +15,7 @@ import { NextResponse, type NextRequest } from "next/server";
  */
 
 // Routes that don't require authentication (OTP-only flow)
-const PUBLIC_ROUTES = ["/auth/login", "/auth/verify-otp", "/auth/callback"];
+const PUBLIC_ROUTES = ["/auth/login", "/auth/verify-otp", "/auth/callback", "/auth/register"];
 
 function isPublicRoute(pathname: string): boolean {
     return PUBLIC_ROUTES.some((route) => pathname.startsWith(route));
@@ -37,11 +37,8 @@ export async function middleware(request: NextRequest) {
         return supabaseResponse;
     }
 
-    // Redirect old auth routes to the unified OTP login
-    if (
-        pathname.startsWith("/auth/register") ||
-        pathname.startsWith("/auth/otp-login")
-    ) {
+    // Redirect old auth routes to the unified login
+    if (pathname.startsWith("/auth/otp-login")) {
         const url = request.nextUrl.clone();
         url.pathname = "/auth/login";
         return NextResponse.redirect(url);

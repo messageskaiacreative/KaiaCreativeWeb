@@ -18,6 +18,15 @@ import { renderWatermarkLayers, exportWithWatermark } from "@/lib/watermark/wate
 import { OPACITY_RECOMMENDATIONS } from "@/lib/watermark/watermark-types";
 import type { WatermarkPosition, PatternStyle } from "@/lib/watermark/watermark-types";
 import {
+    validateImageFile,
+    validateImageDimensions,
+    isRateLimited,
+    getRemainingActions,
+    MAX_EXPORTS_PER_MINUTE,
+    MAX_IMAGE_UPLOAD_MB,
+    MAX_CANVAS_SIZE,
+} from "@/lib/safety-limits";
+import {
     Upload,
     Download,
     RotateCcw,
@@ -92,7 +101,16 @@ export default function WatermarkTool() {
     const rafRef = useRef<number>(0);
     const [isExporting, setIsExporting] = useState(false);
     const [exportFormat, setExportFormat] = useState<"png" | "jpeg">("png");
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    // Auto-clear error after 5 seconds
+    useEffect(() => {
+        if (errorMsg) {
+            const t = setTimeout(() => setErrorMsg(null), 5000);
+            return () => clearTimeout(t);
+        }
+    }, [errorMsg]);
 
     // ============================================================
     // Load image into memory
@@ -105,8 +123,19 @@ export default function WatermarkTool() {
         const img = new Image();
         img.crossOrigin = "anonymous";
         img.onload = () => {
+            // Validate dimensions before accepting
+            const dimError = validateImageDimensions(img.naturalWidth, img.naturalHeight);
+            if (dimError) {
+                setErrorMsg(dimError);
+                clearImage();
+                return;
+            }
             imageRef.current = img;
             drawPreview();
+        };
+        img.onerror = () => {
+            setErrorMsg("Failed to load image. The file may be corrupted.");
+            clearImage();
         };
         img.src = imageUrl;
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -162,19 +191,25 @@ export default function WatermarkTool() {
     // ============================================================
     // File upload handler
     // ============================================================
+    function processFile(file: File) {
+        const fileError = validateImageFile(file);
+        if (fileError) {
+            setErrorMsg(fileError);
+            return;
+        }
+        setErrorMsg(null);
+        setImageFile(file);
+    }
+
     function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0];
-        if (file && file.type.startsWith("image/")) {
-            setImageFile(file);
-        }
+        if (file) processFile(file);
     }
 
     function handleDrop(e: React.DragEvent) {
         e.preventDefault();
         const file = e.dataTransfer.files?.[0];
-        if (file && file.type.startsWith("image/")) {
-            setImageFile(file);
-        }
+        if (file) processFile(file);
     }
 
     // ============================================================
@@ -182,7 +217,16 @@ export default function WatermarkTool() {
     // ============================================================
     async function handleExport() {
         if (!imageRef.current) return;
+
+        // Rate limit check
+        if (isRateLimited("watermark-export", MAX_EXPORTS_PER_MINUTE)) {
+            const remaining = getRemainingActions("watermark-export", MAX_EXPORTS_PER_MINUTE);
+            setErrorMsg(`Export rate limit reached (${MAX_EXPORTS_PER_MINUTE}/min). Please wait a moment. Remaining: ${remaining}`);
+            return;
+        }
+
         setIsExporting(true);
+        setErrorMsg(null);
 
         try {
             const blob = await exportWithWatermark(imageRef.current, config, exportFormat);
@@ -196,6 +240,7 @@ export default function WatermarkTool() {
             URL.revokeObjectURL(url);
         } catch (err) {
             console.error("Export failed:", err);
+            setErrorMsg(err instanceof Error ? err.message : "Export failed unexpectedly.");
         }
 
         setIsExporting(false);
@@ -266,7 +311,7 @@ export default function WatermarkTool() {
                                     Drop image here or click to upload
                                 </p>
                                 <p className="text-[10px] text-slate-400 mt-1">
-                                    Supports JPG, PNG • Up to 8K resolution
+                                    JPG, PNG • Max {MAX_IMAGE_UPLOAD_MB}MB • Max {MAX_CANVAS_SIZE}px
                                 </p>
                             </div>
                         ) : (
@@ -292,6 +337,17 @@ export default function WatermarkTool() {
                         />
                     </div>
 
+                    {/* Error Message */}
+                    {errorMsg && (
+                        <div className="p-2.5 bg-red-50 border border-red-200 rounded-sm flex items-start gap-2">
+                            <AlertCircle className="w-3.5 h-3.5 text-red-500 mt-0.5 flex-shrink-0" />
+                            <p className="text-[11px] text-red-600 leading-relaxed">{errorMsg}</p>
+                            <button onClick={() => setErrorMsg(null)} className="text-red-400 hover:text-red-600 flex-shrink-0">
+                                <X className="w-3 h-3" />
+                            </button>
+                        </div>
+                    )}
+
                     {/* ============================== */}
                     {/* Watermark Modes */}
                     {/* ============================== */}
@@ -312,8 +368,8 @@ export default function WatermarkTool() {
                                     key={key}
                                     onClick={() => toggleMode(key)}
                                     className={`flex items-center gap-3 p-2.5 rounded-sm border text-left transition-all ${config[key]
-                                            ? "border-navy-300 bg-navy-50/50 shadow-sm"
-                                            : "border-slate-200 bg-white hover:border-slate-300"
+                                        ? "border-navy-300 bg-navy-50/50 shadow-sm"
+                                        : "border-slate-200 bg-white hover:border-slate-300"
                                         }`}
                                 >
                                     <div className={`w-7 h-7 rounded-sm flex items-center justify-center flex-shrink-0 ${config[key] ? "bg-navy-800 text-white" : "bg-slate-100 text-slate-400"
@@ -328,8 +384,8 @@ export default function WatermarkTool() {
                                         <span className="text-[10px] text-slate-400 block truncate">{desc}</span>
                                     </div>
                                     <div className={`w-4 h-4 rounded-sm border-2 flex items-center justify-center flex-shrink-0 ${config[key]
-                                            ? "border-navy-800 bg-navy-800"
-                                            : "border-slate-300"
+                                        ? "border-navy-800 bg-navy-800"
+                                        : "border-slate-300"
                                         }`}>
                                         {config[key] && (
                                             <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
@@ -411,8 +467,8 @@ export default function WatermarkTool() {
                                             key={r.value}
                                             onClick={() => setOpacity(r.value)}
                                             className={`text-[9px] px-1.5 py-0.5 rounded-sm border transition-all ${config.opacity === r.value
-                                                    ? "bg-navy-800 text-white border-navy-800"
-                                                    : "bg-slate-50 text-slate-500 border-slate-200 hover:border-navy-300"
+                                                ? "bg-navy-800 text-white border-navy-800"
+                                                : "bg-slate-50 text-slate-500 border-slate-200 hover:border-navy-300"
                                                 }`}
                                             title={r.level}
                                         >
@@ -480,8 +536,8 @@ export default function WatermarkTool() {
                                                 key={p.value}
                                                 onClick={() => setPatternStyle(p.value)}
                                                 className={`flex-1 text-xs py-1.5 rounded-sm border font-semibold transition-all ${config.patternStyle === p.value
-                                                        ? "bg-navy-800 text-white border-navy-800"
-                                                        : "bg-white text-slate-500 border-slate-200 hover:border-navy-300"
+                                                    ? "bg-navy-800 text-white border-navy-800"
+                                                    : "bg-white text-slate-500 border-slate-200 hover:border-navy-300"
                                                     }`}
                                             >
                                                 {p.label}
@@ -536,8 +592,8 @@ export default function WatermarkTool() {
                                         key={fmt}
                                         onClick={() => setExportFormat(fmt)}
                                         className={`flex-1 text-xs py-1.5 rounded-sm border font-semibold uppercase transition-all ${exportFormat === fmt
-                                                ? "bg-navy-800 text-white border-navy-800"
-                                                : "bg-white text-slate-500 border-slate-200 hover:border-navy-300"
+                                            ? "bg-navy-800 text-white border-navy-800"
+                                            : "bg-white text-slate-500 border-slate-200 hover:border-navy-300"
                                             }`}
                                     >
                                         {fmt}
