@@ -22,6 +22,10 @@ const InvoiceForm = dynamic(() => import("@/components/forms/InvoiceForm"), {
 const ContractForm = dynamic(() => import("@/components/forms/ContractForm"), {
     loading: () => <LoadingSkeleton />,
 });
+const ResumeBuilderWorkspace = dynamic(() => import("@/components/resume-builder/ResumeBuilderWorkspace"), {
+    loading: () => <LoadingSkeleton />,
+    ssr: false,
+});
 const ResumeTailoringTool = dynamic(() => import("@/components/tools/ResumeTailoringTool"), {
     loading: () => <LoadingSkeleton />,
 });
@@ -59,6 +63,10 @@ function getFormComponent(docType: string) {
 
 export default function Workspace() {
     const { activeDocumentType } = useAppStore();
+
+    if (activeDocumentType === "resume-builder") {
+        return <ResumeBuilderWorkspace />;
+    }
 
     if (activeDocumentType === "resume-tailoring") {
         return <ResumeTailoringTool />;

@@ -16,9 +16,11 @@ const MD = ({ content }) => {
     if (!content) return null;
     return (
         <SafeMarkdown content={content}>
-            <ReactMarkdown rehypePlugins={[rehypeRaw]} className="prose prose-sm max-w-none prose-p:my-0 prose-ul:my-1 leading-snug">
-                {content}
-            </ReactMarkdown>
+            <div className="prose prose-sm max-w-none prose-p:my-0 prose-ul:my-1 leading-snug">
+                <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                    {content}
+                </ReactMarkdown>
+            </div>
         </SafeMarkdown>
     );
 };
@@ -34,6 +36,7 @@ const fmtDate = (d) => {
 const ExecutiveTemplate = ({ data }) => {
     const { personalInfo = {}, summary = '', experience = [], education = [], skills = [],
         organizations = [], languages = [], courses = [], references = [], certifications = [],
+        customSections = [],
         themeColor, textColor, font, language } = data || {};
 
     const color = themeColor || '#1B2A4A';
@@ -77,8 +80,12 @@ const ExecutiveTemplate = ({ data }) => {
                     }
                 }
             `}</style>
+
+            {/* Fixed background for the right sidebar to print on all pages */}
+            <div className="hidden print:block fixed right-0 bottom-0 top-0 w-44" style={{ backgroundColor: '#f9fafb', borderLeft: `3px solid ${color}`, zIndex: 0 }} />
+
             {/* Executive Dark Header */}
-            <header className="px-8 pt-7 pb-6" style={{ backgroundColor: color }}>
+            <header className="px-8 pt-7 pb-6 relative z-10" style={{ backgroundColor: color }}>
                 <h1 className="text-3xl font-bold text-white tracking-wide mb-1">
                     {personalInfo.firstName} {personalInfo.lastName}
                 </h1>
@@ -98,9 +105,9 @@ const ExecutiveTemplate = ({ data }) => {
             </header>
 
             {/* Body */}
-            <div className="flex">
+            <div className="w-full relative z-10">
                 {/* Left (main) */}
-                <div className="flex-1 px-8 py-2">
+                <div className="float-left w-[calc(100%-11rem)] px-8 py-4">
                     {summary && (
                         <>
                             <SectionTitle title={t.profile} />
@@ -172,10 +179,62 @@ const ExecutiveTemplate = ({ data }) => {
                             </div>
                         </>
                     )}
+
+                    {/* Custom Sections */}
+                    {(Array.isArray(customSections) ? customSections : []).map((section) => {
+                        if (section.type === 'paragraph_like' && section.description) {
+                            return (
+                                <React.Fragment key={section.id}>
+                                    <SectionTitle title={section.name?.toUpperCase()} />
+                                    <div className="text-xs text-gray-700 leading-relaxed text-justify">
+                                        <MD content={section.description} />
+                                    </div>
+                                </React.Fragment>
+                            );
+                        }
+                        if (section.type === 'skill_like' && section.items?.length > 0) {
+                            return (
+                                <React.Fragment key={section.id}>
+                                    <SectionTitle title={section.name?.toUpperCase()} />
+                                    <div className="space-y-1">
+                                        {section.items.map((item, idx) => (
+                                            <div key={item?.id || idx} className="flex justify-between text-xs">
+                                                <span className="font-semibold text-gray-800">{item?.name}</span>
+                                                {item?.level && <span className="text-gray-500">{item.level}</span>}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </React.Fragment>
+                            );
+                        }
+                        if (section.type === 'experience_like' && section.items?.length > 0) {
+                            return (
+                                <React.Fragment key={section.id}>
+                                    <SectionTitle title={section.name?.toUpperCase()} />
+                                    <div className="space-y-4">
+                                        {section.items.map((item, idx) => (
+                                            <div key={item?.id || idx} style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                                                <div className="flex justify-between items-baseline">
+                                                    <h3 className="text-sm font-bold text-gray-900">{item?.title}</h3>
+                                                    <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">{item?.city}</span>
+                                                </div>
+                                                <div className="flex justify-between items-baseline mb-1">
+                                                    <div className="text-xs font-semibold italic" style={{ color }}>{item?.subtitle}</div>
+                                                    <div className="text-xs text-gray-500 whitespace-nowrap">{item?.date}</div>
+                                                </div>
+                                                <div className="text-xs text-gray-600 leading-relaxed" style={textAlignStyle}><MD content={item?.description} /></div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </React.Fragment>
+                            );
+                        }
+                        return null;
+                    })}
                 </div>
 
                 {/* Right sidebar */}
-                <div className="w-44 px-4 py-2 bg-gray-50" style={{ borderLeft: `3px solid ${color}` }}>
+                <div className="float-right w-44 px-6 py-6 bg-gray-50 print:bg-transparent print:border-l-0" style={{ borderLeft: `3px solid ${color}` }}>
                     {skills?.length > 0 && (
                         <div className="mb-4">
                             <SectionTitle title={t.skills} />
@@ -228,6 +287,7 @@ const ExecutiveTemplate = ({ data }) => {
                         </div>
                     )}
                 </div>
+                <div className="clear-both"></div>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-
+import { toast } from "react-hot-toast";
 
 export type ExtractionStatus = "pending" | "processing" | "completed" | "failed";
 
@@ -52,9 +52,11 @@ export function useExtraction() {
 
       if (dbError) throw dbError;
 
+      toast.success("Extraction started! Converting your PDF...");
       return data as Extraction;
     } catch (error: any) {
       console.error("Extraction error:", error);
+      toast.error(error.message || "Failed to start extraction");
       return null;
     } finally {
       setLoading(false);

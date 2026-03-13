@@ -41,9 +41,11 @@ const MarkdownRenderer = ({ content }) => {
     if (!content) return null;
     return (
         <SafeMarkdown content={content}>
-            <ReactMarkdown rehypePlugins={[rehypeRaw]} className="prose prose-sm max-w-none prose-p:my-0 prose-ul:my-0 leading-snug break-words">
-                {content}
-            </ReactMarkdown>
+            <div className="prose prose-sm max-w-none prose-p:my-0 prose-ul:my-0 leading-snug break-words">
+                <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                    {content}
+                </ReactMarkdown>
+            </div>
         </SafeMarkdown>
     );
 };
@@ -61,6 +63,7 @@ const ProfessionalTemplate = ({ data }) => {
         courses = [],
         references = [],
         certifications = [],
+        customSections = [],
         font,
         language,
         sectionOrder = ['education', 'experience', 'organizations', 'certifications', 'languages', 'skills', 'courses', 'references'],
@@ -94,27 +97,31 @@ const ProfessionalTemplate = ({ data }) => {
     const TightSectionLayout = ({ title, items, renderItem, showTitle = true }) => {
         if (!items || items.length === 0) return null;
         return (
-            <section className="mb-3 border-b border-black pb-2 last:border-0 border-opacity-50">
-                <div className="flex flex-col">
-                    <div className="flex gap-4">
-                        <div className="w-[140px] shrink-0 text-left">
-                            {showTitle && <h2 className="text-sm font-semibold uppercase tracking-widest text-black mb-1">{title}</h2>}
-                        </div>
-                        <div className="flex-1" />
-                    </div>
-                    <div className="flex flex-col gap-3">
+            <section className="mb-1 border-b border-black pb-0.5 last:border-0 border-opacity-50">
+                <table className="w-full" style={{ borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+                    <tbody>
+                        {showTitle && (
+                            <tr>
+                                <td className="w-[140px] align-top pr-4 pb-0.5 text-left" style={{ width: '140px', verticalAlign: 'top' }}>
+                                    <h2 className="text-sm font-semibold uppercase tracking-widest text-black mb-0">{title}</h2>
+                                </td>
+                                <td></td>
+                            </tr>
+                        )}
                         {items.map((item, index) => (
-                            <div key={item?.id || index} className="flex gap-4">
-                                <div className="w-[140px] shrink-0 text-left text-sm text-black font-medium leading-snug">
+                            <tr key={item?.id || index}>
+                                <td className="w-[140px] align-top text-left text-sm text-black font-medium leading-snug pr-4 pb-1" style={{ width: '140px', verticalAlign: 'top' }}>
                                     {renderItem(item).date}
-                                </div>
-                                <div className="flex-1 -mt-1 min-w-0">
-                                    {renderItem(item).content}
-                                </div>
-                            </div>
+                                </td>
+                                <td className="align-top pb-1 min-w-0" style={{ verticalAlign: 'top' }}>
+                                    <div className="flex-1 -mt-1 min-w-0">
+                                        {renderItem(item).content}
+                                    </div>
+                                </td>
+                            </tr>
                         ))}
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </section>
         );
     };
@@ -132,7 +139,7 @@ const ProfessionalTemplate = ({ data }) => {
                             <h3 className="text-base font-medium text-black">{exp?.jobTitle}</h3>
                             <span className="text-sm text-black">{exp?.city}</span>
                         </div>
-                        <div className="text-sm text-black mb-1">{exp?.employer}</div>
+                        <div className="text-sm text-black mb-0.5">{exp?.employer}</div>
                         {exp?.description && (
                             <div className="text-sm text-black leading-snug text-justify">
                                 <MarkdownRenderer content={exp.description} />
@@ -156,7 +163,7 @@ const ProfessionalTemplate = ({ data }) => {
                             <h3 className="text-base font-medium text-black">{edu?.degree}</h3>
                             <span className="text-sm text-black">{edu?.city}</span>
                         </div>
-                        <div className="text-sm text-black mb-1">{edu?.school}</div>
+                        <div className="text-sm text-black mb-0.5">{edu?.school}</div>
                         {edu?.description && (
                             <div className="text-sm text-black leading-snug text-justify">
                                 <MarkdownRenderer content={edu.description} />
@@ -180,7 +187,7 @@ const ProfessionalTemplate = ({ data }) => {
                             <h3 className="text-base font-medium text-black">{org?.role}</h3>
                             <span className="text-sm text-black">{org?.city}</span>
                         </div>
-                        <div className="text-sm text-black mb-1">{org?.organization}</div>
+                        <div className="text-sm text-black mb-0.5">{org?.organization}</div>
                         {org?.description && (
                             <div className="text-sm text-black leading-snug text-justify">
                                 <MarkdownRenderer content={org.description} />
@@ -201,7 +208,7 @@ const ProfessionalTemplate = ({ data }) => {
                 content: (
                     <>
                         <h3 className="text-base font-medium text-black mb-0.5">{cert?.name}</h3>
-                        <div className="text-sm text-black mb-1">{cert?.issuer}</div>
+                        <div className="text-sm text-black mb-0.5">{cert?.issuer}</div>
                         {cert?.description && (
                             <div className="text-sm text-black leading-snug text-justify">
                                 <MarkdownRenderer content={cert.description} />
@@ -214,38 +221,50 @@ const ProfessionalTemplate = ({ data }) => {
     );
 
     const renderLanguages = () => safeLanguages.length > 0 && (
-        <section className="mb-3 border-b border-black pb-2 border-opacity-50">
-            <div className="flex gap-4">
-                <div className="w-[140px] shrink-0 text-left">
-                    <h2 className="text-sm font-semibold uppercase tracking-widest text-black">{t.languages}</h2>
-                </div>
-                <div className="flex-1 grid grid-cols-2 gap-4">
-                    {safeLanguages.map((lang, index) => (
-                        <div key={index} className="text-sm text-black flex justify-between border-b border-gray-100 pb-1">
-                            <span className="font-semibold">{lang?.language}</span>
-                            <span className="text-black">{lang?.level}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
+        <section className="mb-1 border-b border-black pb-0.5 border-opacity-50">
+            <table className="w-full" style={{ borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+                <tbody>
+                    <tr>
+                        <td className="w-[140px] align-top pr-4 pb-0.5 text-left" style={{ width: '140px', verticalAlign: 'top' }}>
+                            <h2 className="text-sm font-semibold uppercase tracking-widest text-black mb-0">{t.languages}</h2>
+                        </td>
+                        <td className="align-top" style={{ verticalAlign: 'top' }}>
+                            <div className="grid grid-cols-2 gap-4">
+                                {safeLanguages.map((lang, index) => (
+                                    <div key={index} className="text-sm text-black flex justify-between border-b border-gray-100 pb-0.5">
+                                        <span className="font-semibold">{lang?.language}</span>
+                                        <span className="text-black">{lang?.level}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     );
 
     const renderSkills = () => safeSkills.length > 0 && (
-        <section className="mb-3 border-b border-black pb-2 border-opacity-50">
-            <div className="flex gap-4">
-                <div className="w-[140px] shrink-0 text-left">
-                    <h2 className="text-sm font-semibold uppercase tracking-widest text-black">{t.skills}</h2>
-                </div>
-                <div className="flex-1 grid grid-cols-2 gap-x-4 gap-y-1">
-                    {safeSkills.map((skill, index) => (
-                        <div key={skill?.id || index} className="text-sm text-black">
-                            <span className="font-semibold">{skill?.name}</span>
-                            {skill?.level && <span className="text-black ml-1">({skill.level})</span>}
-                        </div>
-                    ))}
-                </div>
-            </div>
+        <section className="mb-1 border-b border-black pb-0.5 border-opacity-50">
+            <table className="w-full" style={{ borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+                <tbody>
+                    <tr>
+                        <td className="w-[140px] align-top pr-4 pb-0.5 text-left" style={{ width: '140px', verticalAlign: 'top' }}>
+                            <h2 className="text-sm font-semibold uppercase tracking-widest text-black mb-0">{t.skills}</h2>
+                        </td>
+                        <td className="align-top" style={{ verticalAlign: 'top' }}>
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                                {safeSkills.map((skill, index) => (
+                                    <div key={skill?.id || index} className="text-sm text-black">
+                                        <span className="font-semibold">{skill?.name}</span>
+                                        {skill?.level && <span className="text-black ml-1">({skill.level})</span>}
+                                    </div>
+                                ))}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     );
 
@@ -266,22 +285,28 @@ const ProfessionalTemplate = ({ data }) => {
     );
 
     const renderReferences = () => safeReferences.length > 0 && (
-        <section className="mb-3 border-b border-black pb-2 border-opacity-50">
-            <div className="flex gap-4">
-                <div className="w-[140px] shrink-0 text-left">
-                    <h2 className="text-sm font-semibold uppercase tracking-widest text-black">{t.references}</h2>
-                </div>
-                <div className="flex-1 grid grid-cols-2 gap-6">
-                    {safeReferences.map((ref, index) => (
-                        <div key={ref?.id || index} className="text-sm text-black">
-                            <div className="font-semibold text-base">{ref?.name}</div>
-                            <div className="text-black">{ref?.company}</div>
-                            <div className="text-black mt-1">{ref?.email}</div>
-                            <div className="text-black">{ref?.phone}</div>
-                        </div>
-                    ))}
-                </div>
-            </div>
+        <section className="mb-1 border-b border-black pb-0.5 border-opacity-50">
+            <table className="w-full" style={{ borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+                <tbody>
+                    <tr>
+                        <td className="w-[140px] align-top pr-4 pb-0.5 text-left" style={{ width: '140px', verticalAlign: 'top' }}>
+                            <h2 className="text-sm font-semibold uppercase tracking-widest text-black mb-0">{t.references}</h2>
+                        </td>
+                        <td className="align-top" style={{ verticalAlign: 'top' }}>
+                            <div className="grid grid-cols-2 gap-6">
+                                {safeReferences.map((ref, index) => (
+                                    <div key={ref?.id || index} className="text-sm text-black">
+                                        <div className="font-semibold text-base">{ref?.name}</div>
+                                        <div className="text-black">{ref?.company}</div>
+                                        <div className="text-black mt-1">{ref?.email}</div>
+                                        <div className="text-black">{ref?.phone}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     );
 
@@ -296,6 +321,83 @@ const ProfessionalTemplate = ({ data }) => {
         courses: renderCourses,
         references: renderReferences,
     };
+
+    const safeCustomSections = Array.isArray(customSections) ? customSections : [];
+    safeCustomSections.forEach((section) => {
+        sectionRenderers[section.id] = () => {
+            if (section.type === 'paragraph_like' && section.description) {
+                return (
+                    <section className="mb-1 border-b border-black pb-0.5 border-opacity-50">
+                        <table className="w-full" style={{ borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+                            <tbody>
+                                <tr>
+                                    <td className="w-[140px] align-top pr-4 pb-0.5 text-left" style={{ width: '140px', verticalAlign: 'top' }}>
+                                        <h2 className="text-sm font-semibold uppercase tracking-widest text-black mb-0">{section.name?.toUpperCase()}</h2>
+                                    </td>
+                                    <td className="align-top" style={{ verticalAlign: 'top' }}>
+                                        <div className="text-sm leading-relaxed text-black text-justify -mt-0.5">
+                                            <MarkdownRenderer content={section.description} />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                );
+            }
+            if (section.type === 'skill_like' && section.items?.length > 0) {
+                return (
+                    <section className="mb-1 border-b border-black pb-0.5 border-opacity-50">
+                        <table className="w-full" style={{ borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+                            <tbody>
+                                <tr>
+                                    <td className="w-[140px] align-top pr-4 pb-0.5 text-left" style={{ width: '140px', verticalAlign: 'top' }}>
+                                        <h2 className="text-sm font-semibold uppercase tracking-widest text-black mb-0">{section.name?.toUpperCase()}</h2>
+                                    </td>
+                                    <td className="align-top" style={{ verticalAlign: 'top' }}>
+                                        <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                                            {section.items.map((item, index) => (
+                                                <div key={item?.id || index} className="text-sm text-black">
+                                                    <span className="font-semibold">{item?.name}</span>
+                                                    {item?.level && <span className="text-black ml-1">({item.level})</span>}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                );
+            }
+            if (section.type === 'experience_like' && section.items?.length > 0) {
+                return (
+                    <TightSectionLayout
+                        title={section.name?.toUpperCase()}
+                        items={section.items}
+                        renderItem={(item) => ({
+                            date: <>{item?.date}</>,
+                            content: (
+                                <>
+                                    <div className="flex justify-between items-baseline mb-0.5">
+                                        <h3 className="text-base font-medium text-black">{item?.title}</h3>
+                                        <span className="text-sm text-black">{item?.city}</span>
+                                    </div>
+                                    <div className="text-sm text-black mb-0.5">{item?.subtitle}</div>
+                                    {item?.description && (
+                                        <div className="text-sm text-black leading-snug text-justify">
+                                            <MarkdownRenderer content={item.description} />
+                                        </div>
+                                    )}
+                                </>
+                            )
+                        })}
+                    />
+                );
+            }
+            return null;
+        };
+    });
 
     return (
         <div className="w-full h-full bg-white text-black" style={{ ...fontStyle, padding: '1cm 1.5cm 1cm 1.5cm' }}>
@@ -315,7 +417,7 @@ const ProfessionalTemplate = ({ data }) => {
                 }
             `}</style>
 
-            <header className="text-center mb-5 border-b border-black pb-3 border-opacity-50">
+            <header className="text-center mb-2 border-b border-black pb-1 border-opacity-50">
                 <div className="flex flex-wrap justify-center items-baseline gap-2 mb-2">
                     <h1 className="text-2xl font-normal text-black tracking-wide leading-none">
                         {personalInfo?.firstName} {personalInfo?.lastName}
@@ -335,23 +437,28 @@ const ProfessionalTemplate = ({ data }) => {
                         personalInfo?.website
                     ].filter(Boolean).map((info, index, arr) => (
                         <span key={`${index}-${String(info).substring(0, 10)}`}>
-                            {String(info).includes('http') ? <a href={String(info)} target="_blank" rel="noopener noreferrer" className="text-black no-underline hover:text-gray-700">{info}</a> : info}
-                            {index < arr.length - 1 && ","}
+                            {String(info).includes('http') ? <a href={String(info)} target="_blank" rel="noopener noreferrer" className="text-black no-underline hover:text-gray-700">{String(info).trim()}</a> : String(info).trim()}{index < arr.length - 1 && ","}
                         </span>
                     ))}
                 </div>
             </header>
 
             {summary && (
-                <section className="mb-3 border-b border-black pb-2 border-opacity-50">
-                    <div className="flex gap-4">
-                        <div className="w-[140px] shrink-0 text-left">
-                            <h2 className="text-sm font-semibold uppercase tracking-widest text-black">{t.profile}</h2>
-                        </div>
-                        <div className="flex-1 text-sm leading-relaxed text-black text-justify -mt-0.5">
-                            <MarkdownRenderer content={summary} />
-                        </div>
-                    </div>
+                <section className="mb-1 border-b border-black pb-0.5 border-opacity-50">
+                    <table className="w-full" style={{ borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+                        <tbody>
+                            <tr>
+                                <td className="w-[140px] align-top pr-4 pb-0.5 text-left" style={{ width: '140px', verticalAlign: 'top' }}>
+                                    <h2 className="text-sm font-semibold uppercase tracking-widest text-black mb-0">{t.profile}</h2>
+                                </td>
+                                <td className="align-top" style={{ verticalAlign: 'top' }}>
+                                    <div className="text-sm leading-relaxed text-black text-justify -mt-0.5">
+                                        <MarkdownRenderer content={summary} />
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             )}
 

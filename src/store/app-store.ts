@@ -44,7 +44,7 @@ interface AppState {
 export const useAppStore = create<AppState>((set, get) => ({
     user: null,
 
-    activeDocumentType: "official-letter",
+    activeDocumentType: "resume-builder",
     currentPayload: null,
 
     isSidebarOpen: true,

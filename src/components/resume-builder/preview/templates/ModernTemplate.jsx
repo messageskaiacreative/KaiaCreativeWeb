@@ -21,9 +21,11 @@ const MD = ({ content }) => {
     if (!content) return null;
     return (
         <SafeMarkdown content={content}>
-            <ReactMarkdown rehypePlugins={[rehypeRaw]} className="prose prose-sm max-w-none prose-p:my-0 prose-ul:my-1 leading-snug">
-                {content}
-            </ReactMarkdown>
+            <div className="prose prose-sm max-w-none prose-p:my-0 prose-ul:my-1 leading-snug">
+                <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                    {content}
+                </ReactMarkdown>
+            </div>
         </SafeMarkdown>
     );
 };
@@ -48,6 +50,7 @@ const ModernTemplate = ({ data }) => {
         courses = [],
         references = [],
         certifications = [],
+        customSections = [],
         themeColor,
         textColor,
         font,
@@ -97,7 +100,13 @@ const ModernTemplate = ({ data }) => {
                             src={personalInfo.photoUrl}
                             alt={`${personalInfo.firstName || ''} ${personalInfo.lastName || ''}`}
                             className="object-cover flex-shrink-0"
-                            style={{ width: photoSizePx, height: photoSizePx, borderRadius: photoRadius, border: photoBorder }}
+                            style={{
+                                width: photoSizePx,
+                                height: photoSizePx,
+                                borderRadius: photoRadius,
+                                border: photoBorder,
+                                clipPath: photoShape === 'circle' ? 'circle(50% at 50% 50%)' : 'none'
+                            }}
                         />
                     )}
                     <div>
@@ -107,21 +116,21 @@ const ModernTemplate = ({ data }) => {
                         <p className="text-xl font-medium text-gray-600 mt-1">{personalInfo?.jobTitle}</p>
                     </div>
                 </div>
-                <div className="flex flex-wrap mt-2 text-sm text-gray-600 gap-x-4 gap-y-1">
-                    {personalInfo?.email && <span>{personalInfo.email}</span>}
-                    {personalInfo?.phone && <span>{personalInfo.phone}</span>}
+                <div className="flex gap-x-6 gap-y-2 mt-3 text-sm text-gray-700 flex-wrap">
+                    {personalInfo?.email && <span className="font-medium">{personalInfo.email}</span>}
+                    {personalInfo?.phone && <span className="font-medium">{personalInfo.phone}</span>}
                     {personalInfo?.city && (
-                        <span>{personalInfo.city}{personalInfo.country ? `, ${personalInfo.country}` : ''}</span>
+                        <span className="font-medium">{personalInfo.city}{personalInfo.country ? `, ${personalInfo.country}` : ''}</span>
                     )}
                 </div>
             </header>
 
-            <div className="grid grid-cols-12 gap-8">
-                <div className="col-span-8 space-y-6">
+            <div className="w-full px-8 pb-8" style={{ color: txtColor }}>
+                <div className="float-left w-[65%] pr-6 space-y-6">
                     {summary && (
                         <section>
                             <h2 className="text-lg uppercase tracking-wider mb-2" style={{ color }}>{t.profile}</h2>
-                            <div className="text-gray-700 leading-relaxed text-sm pl-4">
+                            <div className="text-gray-700 leading-snug text-sm text-justify">
                                 <MD content={summary} />
                             </div>
                         </section>
@@ -134,18 +143,18 @@ const ModernTemplate = ({ data }) => {
                             <div className="space-y-6">
                                 {safeExperience.map((exp, index) => (
                                     <div key={exp?.id || index} className="flex flex-col sm:flex-row gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
-                                        <div className="sm:w-1/4 flex-shrink-0">
+                                        <div className="w-[28%] flex-shrink-0 pr-4">
                                             <div className="text-sm font-semibold text-gray-600">
                                                 {fmtDate(exp?.startDate)} - {exp?.endDate ? fmtDate(exp.endDate) : t.present}
                                             </div>
                                         </div>
-                                        <div className="sm:w-3/4">
+                                        <div className="w-[72%]">
                                             <div className="flex justify-between items-baseline mb-1">
                                                 <h3 className="font-bold text-lg" style={{ color: txtColor }}>{exp?.jobTitle}</h3>
                                                 <span className="text-sm text-gray-500">{exp?.city}</span>
                                             </div>
                                             <div className="text-sm font-medium text-gray-700 mb-2">{exp?.employer}</div>
-                                            <div className="text-sm text-gray-700 leading-relaxed pl-0" style={textAlignStyle}>
+                                            <div className="text-sm text-gray-700 leading-snug text-justify" style={{ textAlign: 'justify' }}>
                                                 <MD content={exp?.description} />
                                             </div>
                                         </div>
@@ -162,18 +171,18 @@ const ModernTemplate = ({ data }) => {
                             <div className="space-y-6">
                                 {safeEducation.map((edu, index) => (
                                     <div key={edu?.id || index} className="flex flex-col sm:flex-row gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
-                                        <div className="sm:w-1/4 flex-shrink-0">
+                                        <div className="w-[28%] flex-shrink-0 pr-4">
                                             <div className="text-sm font-semibold text-gray-600">
                                                 {fmtDate(edu?.startDate)} - {edu?.endDate ? fmtDate(edu.endDate) : t.present}
                                             </div>
                                         </div>
-                                        <div className="sm:w-3/4">
+                                        <div className="w-[72%]">
                                             <div className="flex justify-between items-baseline mb-1">
                                                 <h3 className="font-bold text-lg" style={{ color: txtColor }}>{edu?.degree}</h3>
                                                 <span className="text-sm text-gray-500">{edu?.city}</span>
                                             </div>
                                             <div className="text-sm font-medium text-gray-700 mb-2">{edu?.school}</div>
-                                            <div className="text-sm text-gray-700 leading-relaxed pl-0" style={textAlignStyle}>
+                                            <div className="text-sm text-gray-700 leading-snug text-justify" style={{ textAlign: 'justify' }}>
                                                 <MD content={edu?.description} />
                                             </div>
                                         </div>
@@ -190,17 +199,17 @@ const ModernTemplate = ({ data }) => {
                             <div className="space-y-6">
                                 {safeOrganizations.map((org, index) => (
                                     <div key={org?.id || index} className="flex flex-col sm:flex-row gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
-                                        <div className="sm:w-1/4 flex-shrink-0">
+                                        <div className="w-[28%] flex-shrink-0 pr-4">
                                             <div className="text-sm font-semibold text-gray-600">
                                                 {fmtDate(org?.startDate)} - {org?.endDate ? fmtDate(org.endDate) : t.present}
                                             </div>
                                         </div>
-                                        <div className="sm:w-3/4">
+                                        <div className="w-[72%]">
                                             <div className="flex justify-between items-baseline mb-1">
                                                 <h3 className="font-bold text-lg" style={{ color: txtColor }}>{org?.role}</h3>
                                             </div>
                                             <div className="text-sm font-medium text-gray-700 mb-2">{org?.organization}</div>
-                                            <div className="text-sm text-gray-700 leading-relaxed pl-0" style={textAlignStyle}>
+                                            <div className="text-sm text-gray-700 leading-snug text-justify" style={{ textAlign: 'justify' }}>
                                                 <MD content={org?.description} />
                                             </div>
                                         </div>
@@ -259,9 +268,67 @@ const ModernTemplate = ({ data }) => {
                             </div>
                         </section>
                     )}
+
+                    {/* Custom Sections */}
+                    {(Array.isArray(customSections) ? customSections : []).map((section) => {
+                        if (section.type === 'paragraph_like' && section.description) {
+                            return (
+                                <section key={section.id}>
+                                    <h2 className="text-lg uppercase tracking-wider mb-2" style={{ color }}>{section.name}</h2>
+                                    <div className="text-gray-700 leading-snug text-sm text-justify">
+                                        <MD content={section.description} />
+                                    </div>
+                                </section>
+                            );
+                        }
+                        if (section.type === 'skill_like' && section.items?.length > 0) {
+                            return (
+                                <section key={section.id}>
+                                    <h2 className="text-lg uppercase tracking-wider mb-4 border-b-2 inline-block pb-1"
+                                        style={{ color, borderColor: color }}>{section.name}</h2>
+                                    <div className="space-y-2 pl-4">
+                                        {section.items.map((item, idx) => (
+                                            <div key={item?.id || idx} className="flex justify-between text-sm">
+                                                <span className="font-semibold" style={{ color: txtColor }}>{item?.name}</span>
+                                                {item?.level && <span className="text-gray-500">{item.level}</span>}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            );
+                        }
+                        if (section.type === 'experience_like' && section.items?.length > 0) {
+                            return (
+                                <section key={section.id}>
+                                    <h2 className="text-lg uppercase tracking-wider mb-4 border-b-2 inline-block pb-1"
+                                        style={{ color, borderColor: color }}>{section.name}</h2>
+                                    <div className="space-y-6">
+                                        {section.items.map((item, idx) => (
+                                            <div key={item?.id || idx} className="flex flex-col sm:flex-row gap-4" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                                                <div className="w-[28%] flex-shrink-0 pr-4">
+                                                    <div className="text-sm font-semibold text-gray-600">{item?.date}</div>
+                                                </div>
+                                                <div className="w-[72%]">
+                                                    <div className="flex justify-between items-baseline mb-1">
+                                                        <h3 className="font-bold text-lg" style={{ color: txtColor }}>{item?.title}</h3>
+                                                        <span className="text-sm text-gray-500">{item?.city}</span>
+                                                    </div>
+                                                    <div className="text-sm font-medium text-gray-700 mb-2">{item?.subtitle}</div>
+                                                    <div className="text-sm text-gray-700 leading-snug text-justify" style={{ textAlign: 'justify' }}>
+                                                        <MD content={item?.description} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            );
+                        }
+                        return null;
+                    })}
                 </div>
 
-                <div className="col-span-4 space-y-6">
+                <div className="float-right w-[35%] pl-4 space-y-6">
                     {(personalInfo?.linkedin || personalInfo?.website) ? (
                         <section>
                             <h2 className="text-lg uppercase tracking-wider mb-3" style={{ color }}>Links</h2>
@@ -316,6 +383,7 @@ const ModernTemplate = ({ data }) => {
                         </section>
                     )}
                 </div>
+                <div className="clear-both"></div>
             </div>
         </div>
     );

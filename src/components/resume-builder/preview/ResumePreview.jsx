@@ -12,12 +12,12 @@ import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSo
 import { CSS } from '@dnd-kit/utilities';
 
 const TEMPLATES = [
-    { id: 'modern', label: 'Modern' },
-    { id: 'professional', label: 'Professional' },
-    { id: 'minimal', label: 'Minimal' },
-    { id: 'creative', label: 'Creative' },
-    { id: 'executive', label: 'Executive' },
-    { id: 'tech', label: 'Tech' },
+    { id: 'modern', label: 'Modern', emoji: '🎨' },
+    { id: 'professional', label: 'Professional', emoji: '📋' },
+    { id: 'minimal', label: 'Minimal', emoji: '⬜' },
+    { id: 'creative', label: 'Creative', emoji: '✨' },
+    { id: 'executive', label: 'Executive', emoji: '👔' },
+    { id: 'tech', label: 'Tech', emoji: '💻' },
 ];
 
 const TEMPLATE_MAP = {
@@ -98,7 +98,14 @@ const ResumePreview = () => {
     const TemplateComponent = TEMPLATE_MAP[selectedTemplate] || ModernTemplate;
 
     const isProfessional = selectedTemplate === 'professional';
+    const customSections = Array.isArray(resumeData.customSections) ? resumeData.customSections : [];
     const sectionOrder = resumeData.sectionOrder || DEFAULT_SECTION_ORDER;
+
+    // Build labels map that includes custom sections
+    const allSectionLabels = { ...SECTION_LABELS };
+    customSections.forEach(cs => {
+        allSectionLabels[cs.id] = cs.name || 'Custom Section';
+    });
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -128,7 +135,7 @@ const ResumePreview = () => {
                                 : 'bg-slate-50 text-slate-500 border-slate-200 hover:border-slate-300 hover:text-slate-700 hover:bg-slate-100'
                                 }`}
                         >
-                            {t.label}
+                            {t.emoji} {t.label}
                         </button>
                     ))}
                 </div>
@@ -286,32 +293,30 @@ const ResumePreview = () => {
                         </>
                     )}
 
-                    {/* Section Order Button - Professional only */}
-                    {isProfessional && (
-                        <>
-                            <div className="w-px h-5 bg-slate-200 mx-1" />
-                            <button
-                                onClick={() => setShowSectionOrder(!showSectionOrder)}
-                                className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-sm h-8 border transition-all ${showSectionOrder
-                                    ? 'bg-navy-800 text-white border-navy-800'
-                                    : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700'
-                                    }`}
-                            >
-                                {showSectionOrder ? 'Sembunyikan Urutan' : 'Urutkan Section'}
-                            </button>
-                        </>
-                    )}
+                    {/* Section Order Button */}
+                    <>
+                        <div className="w-px h-5 bg-slate-200 mx-1" />
+                        <button
+                            onClick={() => setShowSectionOrder(!showSectionOrder)}
+                            className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-sm h-8 border transition-all ${showSectionOrder
+                                ? 'bg-navy-800 text-white border-navy-800'
+                                : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700'
+                                }`}
+                        >
+                            {showSectionOrder ? 'Sembunyikan Urutan' : 'Urutkan Section'}
+                        </button>
+                    </>
                 </div>
             </div>
 
             {/* Section Order Panel */}
-            {isProfessional && showSectionOrder && (
+            {showSectionOrder && (
                 <div className="bg-white p-4 rounded-sm shadow-sm print:hidden z-10 border border-slate-200 w-full max-w-sm self-center">
                     <div className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mb-3 border-b border-slate-100 pb-2">Urutkan dengan drag:</div>
                     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                         <SortableContext items={sectionOrder} strategy={verticalListSortingStrategy}>
                             {sectionOrder.map((sectionKey) => (
-                                <SortableSection key={sectionKey} id={sectionKey} label={SECTION_LABELS[sectionKey] || sectionKey} />
+                                <SortableSection key={sectionKey} id={sectionKey} label={allSectionLabels[sectionKey] || sectionKey} />
                             ))}
                         </SortableContext>
                     </DndContext>

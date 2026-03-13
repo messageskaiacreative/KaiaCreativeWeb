@@ -8,6 +8,7 @@ export type SubscriptionTier = "free" | "premium";
 
 /** Available document types */
 export type DocumentType =
+    | "resume-builder"
     | "official-letter"
     | "cover-letter"
     | "pdf-from-text"
@@ -30,6 +31,13 @@ export interface DocumentCategory {
 
 /** All available document categories */
 export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
+    {
+        id: "resume-builder",
+        label: "CV Builder",
+        description: "Build a professional CV with live preview, multiple templates, and download as PDF or Word",
+        icon: "FileEdit",
+        tier: "free",
+    },
     {
         id: "official-letter",
         label: "Official Letter",
