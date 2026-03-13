@@ -1,0 +1,402 @@
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+
+> Build error occurred
+Error: Turbopack build failed with 15 errors:
+./src/components/resume-builder/editor/CertificationForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mPlus[39m[33m,[39m [33mTrash[39m[33m,[39m [33mChevronDown[39m[33m,[39m [33mChevronUp[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/CertificationForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/CourseForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mPlus[39m[33m,[39m [33mTrash[39m[33m,[39m [33mChevronDown[39m[33m,[39m [33mChevronUp[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/CourseForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/EducationForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mPlus[39m[33m,[39m [33mTrash[39m[33m,[39m [33mChevronDown[39m[33m,[39m [33mChevronUp[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/EducationForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/ExperienceForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mRichTextarea[39m [36mfrom[39m [32m'../ui/RichTextarea'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/ExperienceForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/LanguageForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mPlus[39m[33m,[39m [33mTrash[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/LanguageForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/OrganizationForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mRichTextarea[39m [36mfrom[39m [32m'../ui/RichTextarea'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/OrganizationForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/PersonalDetailsForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useRef } [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m { [33mINDONESIAN_CITIES[39m } [36mfrom[39m [32m'../../data/indonesianCities'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mCamera[39m[33m,[39m [33mX[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/PersonalDetailsForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/ReferenceForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mPlus[39m[33m,[39m [33mTrash[39m[33m,[39m [33mChevronDown[39m[33m,[39m [33mChevronUp[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/ReferenceForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/SkillsForm.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mPlus[39m[33m,[39m [33mX[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/SkillsForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/SummaryForm.jsx:1:42
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+ [90m   |[39m                                          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m { [33mSparkles[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mButton[39m [36mfrom[39m [32m'../ui/Button'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/SummaryForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/preview/ResumePreview.jsx:2:1
+Module not found: Can't resolve '../../context/ResumeContext'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m [33mModernTemplate[39m [36mfrom[39m [32m'./templates/ModernTemplate'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mProfessionalTemplate[39m [36mfrom[39m [32m'./templates/ProfessionalTemplate'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m [33mMinimalTemplate[39m [36mfrom[39m [32m'./templates/MinimalTemplate'[39m[33m;[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/preview/ResumePreview.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/EducationForm.jsx:9:1
+Module not found: Can't resolve '../../data/indonesianCities'
+[0m [90m  7 |[39m [36mimport[39m { arrayMove[33m,[39m [33mSortableContext[39m[33m,[39m sortableKeyboardCoordinates[33m,[39m verticalListSortingStrategy } [36mfrom[39m [32m'@dnd-kit/sortable'[39m[33m;[39m
+ [90m  8 |[39m [36mimport[39m [33mSortableItem[39m [36mfrom[39m [32m'../ui/SortableItem'[39m[33m;[39m
+[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mINDONESIAN_CITIES[39m } [36mfrom[39m [32m'../../data/indonesianCities'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 10 |[39m
+ [90m 11 |[39m [36mconst[39m generateId [33m=[39m () [33m=>[39m [33mDate[39m[33m.[39mnow()[33m.[39mtoString([35m36[39m) [33m+[39m [33mMath[39m[33m.[39mrandom()[33m.[39mtoString([35m36[39m)[33m.[39msubstr([35m2[39m)[33m;[39m
+ [90m 12 |[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/EducationForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/ExperienceForm.jsx:10:1
+Module not found: Can't resolve '../../data/indonesianCities'
+[0m [90m  8 |[39m [36mimport[39m { arrayMove[33m,[39m [33mSortableContext[39m[33m,[39m sortableKeyboardCoordinates[33m,[39m verticalListSortingStrategy } [36mfrom[39m [32m'@dnd-kit/sortable'[39m[33m;[39m
+ [90m  9 |[39m [36mimport[39m [33mSortableItem[39m [36mfrom[39m [32m'../ui/SortableItem'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mINDONESIAN_CITIES[39m } [36mfrom[39m [32m'../../data/indonesianCities'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 11 |[39m
+ [90m 12 |[39m [36mconst[39m generateId [33m=[39m () [33m=>[39m [33mDate[39m[33m.[39mnow()[33m.[39mtoString([35m36[39m) [33m+[39m [33mMath[39m[33m.[39mrandom()[33m.[39mtoString([35m36[39m)[33m.[39msubstr([35m2[39m)[33m;[39m
+ [90m 13 |[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/ExperienceForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/OrganizationForm.jsx:10:1
+Module not found: Can't resolve '../../data/indonesianCities'
+[0m [90m  8 |[39m [36mimport[39m { arrayMove[33m,[39m [33mSortableContext[39m[33m,[39m sortableKeyboardCoordinates[33m,[39m verticalListSortingStrategy } [36mfrom[39m [32m'@dnd-kit/sortable'[39m[33m;[39m
+ [90m  9 |[39m [36mimport[39m [33mSortableItem[39m [36mfrom[39m [32m'../ui/SortableItem'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mINDONESIAN_CITIES[39m } [36mfrom[39m [32m'../../data/indonesianCities'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 11 |[39m
+ [90m 12 |[39m [36mconst[39m generateId [33m=[39m () [33m=>[39m [33mDate[39m[33m.[39mnow()[33m.[39mtoString([35m36[39m) [33m+[39m [33mMath[39m[33m.[39mrandom()[33m.[39mtoString([35m36[39m)[33m.[39msubstr([35m2[39m)[33m;[39m
+ [90m 13 |[39m[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/OrganizationForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/resume-builder/editor/PersonalDetailsForm.jsx:4:1
+Module not found: Can't resolve '../../data/indonesianCities'
+[0m [90m 2 |[39m [36mimport[39m { useResume } [36mfrom[39m [32m'../../context/ResumeContext'[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m [33mInput[39m [36mfrom[39m [32m'../ui/Input'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mINDONESIAN_CITIES[39m } [36mfrom[39m [32m'../../data/indonesianCities'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mimport[39m { [33mCamera[39m[33m,[39m [33mX[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m
+ [90m 6 |[39m
+ [90m 7 |[39m [36mconst[39m [33mPersonalDetailsForm[39m [33m=[39m () [33m=>[39m {[0m
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/resume-builder/editor/PersonalDetailsForm.jsx [Client Component Browser]
+    ./src/components/resume-builder/editor/FormEditor.jsx [Client Component Browser]
+    ./src/components/resume-builder/ResumeBuilderWorkspace.tsx [Client Component Browser]
+    ./src/components/layout/Workspace.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Client Component Browser]
+    ./src/components/layout/AppShell.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./src/components/resume-builder/editor/CertificationForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/CourseForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/EducationForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/ExperienceForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/LanguageForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/OrganizationForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/PersonalDetailsForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/ReferenceForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/SkillsForm.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/SummaryForm.jsx:1:42)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/preview/ResumePreview.jsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/EducationForm.jsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/ExperienceForm.jsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/OrganizationForm.jsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/resume-builder/editor/PersonalDetailsForm.jsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

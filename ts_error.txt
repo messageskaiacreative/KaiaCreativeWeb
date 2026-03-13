@@ -1,0 +1,1 @@
+src/components/tools/ResumeTailoringTool.tsx(3,8): error TS1259: Module '"D:/File/file/Fauzan Lubada/Latihan dari Kagle/LATIHAN UNTUK MAGANG AAMIINN/KIAI-CREATIVE/docgen-saas/node_modules/@types/react/index"' can only be default-imported using the 'esModuleInterop' flag
