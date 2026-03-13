@@ -13,7 +13,7 @@ export type DocumentType =
     | "pdf-from-text"
     | "invoice"
     | "contract"
-    | "resume-builder"
+    | "cv-from-file"
     | "resume-tailoring"
     | "resume-distribution"
     | "pdf-extractor"
@@ -73,9 +73,9 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
         tier: "free",
     },
     {
-        id: "resume-builder",
-        label: "CV Builder",
-        description: "Create a professional ATS-friendly CV from scratch",
+        id: "cv-from-file",
+        label: "CV from File",
+        description: "Generate a professional CV from your TXT, Markdown, or JSON file",
         icon: "FileEdit",
         tier: "free",
     },

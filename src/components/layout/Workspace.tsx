@@ -28,7 +28,7 @@ const ResumeTailoringTool = dynamic(() => import("@/components/tools/ResumeTailo
 const ResumeDistributionTool = dynamic(() => import("@/components/tools/ResumeDistributionTool"), {
     loading: () => <LoadingSkeleton />,
 });
-const ResumeBuilderWorkspace = dynamic(() => import("@/components/resume-builder/ResumeBuilderWorkspace"), {
+const CVFromFileTool = dynamic(() => import("@/components/tools/CVFromFileTool"), {
     loading: () => <LoadingSkeleton />,
     ssr: false,
 });
@@ -68,8 +68,8 @@ export default function Workspace() {
         return <ResumeDistributionTool />;
     }
 
-    if (activeDocumentType === "resume-builder") {
-        return <ResumeBuilderWorkspace />;
+    if (activeDocumentType === "cv-from-file") {
+        return <CVFromFileTool />;
     }
 
     if (activeDocumentType === "pdf-extractor") {
